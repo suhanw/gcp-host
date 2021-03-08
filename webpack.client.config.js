@@ -1,4 +1,4 @@
-'use strict';
+'use strict'; 
 
 console.log('using webpack client config', process.env.NODE_ENV)
 
