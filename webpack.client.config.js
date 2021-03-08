@@ -18,7 +18,7 @@ const config = {
 	output: {
 		path: path.join(__dirname, './build/client'),
 		publicPath: process.env.NODE_ENV === 'production' ? `https://storage.googleapis.com/gcp-host/build/client/` : `http://localhost:${port}/`, 
-		filename: `scripts/[name].js`,
+		filename: `scripts/[name]${process.env.NODE_ENV === 'production' ? '.[contenthash]' : ''}.js`,
 	},
 
 	devServer: { 
@@ -28,7 +28,7 @@ const config = {
 
 	plugins: [
 		new MiniCssExtractPlugin({ // extracts css from bundle
-			filename: `styles/[name].css`,
+			filename: `styles/[name]${process.env.NODE_ENV === 'production' ? '.[contenthash]' : ''}.css`,
 		}),
 	],
 
