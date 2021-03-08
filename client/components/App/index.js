@@ -13,7 +13,7 @@ const App = () => {
 	return (
 		<div className={style.app}>
 			<Header />
-			Hello world
+			Hello world again
 			<Footer />
 		</div>
 	);
