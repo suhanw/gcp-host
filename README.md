@@ -1,4 +1,4 @@
-# Basic React SSR App
+# Basic HOST App
 
 ## To run app locally: 
 1. Run `npm install`
