@@ -24,7 +24,7 @@ module.exports = {
 
 		modules: [
 			path.resolve(__dirname),
-			'node_modules'
+			// 'node_modules'
 		],
 
 		alias: {
