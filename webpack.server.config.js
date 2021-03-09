@@ -5,6 +5,8 @@ console.log('using webpack server config', process.env.NODE_ENV)
 const path = require('path');
 const webpackNodeExternals = require('webpack-node-externals');
 const { merge } = require('webpack-merge');
+const webpack = require('webpack');
+const { ModuleFederationPlugin } = webpack.container;
 const sharedConfig = require('./webpack.shared.config.js');
 
 let config = {
@@ -25,6 +27,18 @@ let config = {
 	externals: [webpackNodeExternals({
 		allowlist: [/^webpack\/container\/reference\//],
 	})],
+
+	plugins: [
+		new ModuleFederationPlugin({
+			name: 'host',
+			library: { type: 'commonjs-module' },
+			filename: 'container.js',
+			remotes: {
+				remote: path.join(__dirname, '../gcp-remote/build/server/container.js'),
+			},
+			// shared: require("./package.json").dependencies,
+		}),
+	], 
 
 	module: {
 		rules: [

@@ -2,7 +2,7 @@ import path from 'path';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import { ChunkExtractor } from '@loadable/server';
-import App from '../client/components/App';
+import App from 'components/app';
 
 const renderer = async (request, h) => {
 	// const jsx = ReactDOMServer.renderToString(<App />);
@@ -23,15 +23,15 @@ const renderer = async (request, h) => {
 	// And you can even collect your style tags (if you use "mini-css-extract-plugin")
 	const styleTags = extractor.getStyleTags() // or extractor.getStyleElements();
 
-	console.log({
-		styleTags, 
-		path: request.path,
-	}); 
+	// console.log({
+	// 	styleTags, 
+	// 	path: request.path,
+	// }); 
 
 	// const clientBundleScript = `<script src="http://localhost:8080/scripts/bundle.js"></script>`;
 	// const clientBundleStyle = `<link rel="stylesheet" href="http://localhost:8080/styles/client_index_js.bundle.css">`;
-	// const remoteBundleScript = `<script src="http://localhost:8081/scripts/remoteEntry.js"></script>`;
-	const remoteBundleScript = ''
+	const remoteBundleScript = `<script src="http://localhost:8081/scripts/remoteEntry.js"></script>`;
+	// const remoteBundleScript = ''
 
 	// res.send(`
 	// 	<!DOCTYPE html>
