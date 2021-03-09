@@ -2,12 +2,15 @@ steps:
     - name: node:12
       entrypoint: npm
       args: ['install']
+    # - name: gcr.io/cloud-builders/gsutil # downloads the build files from REMOTE Cloud Storage
+    #   args: ['-m', 'cp', '-r', '-c', '-d', 'gs://gcp-remote/build', 'remote-build']
     - name: node:12
       entrypoint: npm
       args: ['run', 'build']
       env:
           - 'NODE_ENV=production'
-    - name: gcr.io/cloud-builders/gsutil # uploads the build files with Cloud Storage
+          # - 'PARTNER=aeon'
+    - name: gcr.io/cloud-builders/gsutil # uploads the build files to Cloud Storage
       args: ['-m', 'rsync', '-r', '-c', '-d', './build', 'gs://gcp-host/build']
     - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk' # deploys server to App Engine
       entrypoint: 'bash'
