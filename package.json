@@ -12,8 +12,7 @@
 		"dev:client": "webpack serve --config webpack.client.config.js",
 		"dev:server": "nodemon --watch client --watch server --exec 'run-s clear:server build:server start'",
 		"dev": "run-p dev:client dev:server",
-		"build": "run-s clear build:*",
-		"gcp-build": "NODE_ENV=production run-s clear build:*"
+		"build": "run-s clear build:*"
 	},
 	"author": "Suhan Wijaya",
 	"license": "ISC",

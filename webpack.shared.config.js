@@ -27,8 +27,5 @@ module.exports = {
 			filename: `loadable-stats.json`, // list of webpack chunk assets
 			writeToDisk: true 
 		}),
-		new webpack.DefinePlugin({
-			'process.env.NODE_ENV': `"${process.env.NODE_ENV}"`
-		}),
 	]
 };
