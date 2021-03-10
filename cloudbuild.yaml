@@ -3,7 +3,7 @@ steps:
       entrypoint: npm
       args: ['install']
     - name: gcr.io/cloud-builders/gsutil # downloads the build files from REMOTE Cloud Storage
-      args: ['-m', 'cp', '-r', '-c', '-d', 'gs://gcp-remote/build', 'remote-build']
+      args: ['-m', 'cp', '-r', 'gs://gcp-remote/build', 'remote-build']
     - name: node:12
       entrypoint: npm
       args: ['run', 'build']
