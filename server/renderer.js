@@ -39,7 +39,7 @@ const renderer = async (request, h) => {
 			<head>
 				<meta charset="UTF-8">
 				<meta name="viewport" content="width=device-width, initial-scale=1.0">
-				<title>${process.env.NODE_ENV || 'boxed'} SSR App</title>
+				<title>${process.env.PARTNER || 'boxed'} SSR App</title>
 				${remoteBundleScript}
 				${linkTags}
 				${styleTags}
