@@ -27,7 +27,11 @@ const renderer = async (request, h) => {
 	// 	path: request.path,
 	// }); 
 
-	const remoteBundleScript = `<script src="${process.env.NODE_ENV === 'production' ? `https://storage.googleapis.com/${process.env.PARTNER || 'boxed'}-remote/build/client/` : 'http://localhost:8081/'}scripts/remoteEntry.js?build=${process.env.BUILD_ID}"></script>`;
+	let remoteBundleScript = '';
+
+	if (process.env.PARTNER && process.env.PARTNER !== 'boxed') {
+		remoteBundleScript = `<script src="${process.env.NODE_ENV === 'production' ? `https://storage.googleapis.com/${process.env.PARTNER}-remote/build/client/` : 'http://localhost:8081/'}scripts/remoteEntry.js?build=${process.env.BUILD_ID}"></script>`;
+	}
 
 	return h.response(`
 		<!DOCTYPE html>
@@ -35,7 +39,7 @@ const renderer = async (request, h) => {
 			<head>
 				<meta charset="UTF-8">
 				<meta name="viewport" content="width=device-width, initial-scale=1.0">
-				<title>My SSR App</title>
+				<title>${process.env.NODE_ENV || 'boxed'} SSR App</title>
 				${remoteBundleScript}
 				${linkTags}
 				${styleTags}
