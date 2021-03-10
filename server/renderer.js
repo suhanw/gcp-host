@@ -27,7 +27,7 @@ const renderer = async (request, h) => {
 	// 	path: request.path,
 	// }); 
 
-	const remoteBundleScript = `<script src="${process.env.NODE_ENV === 'production' ? 'https://storage.googleapis.com/gcp-remote/build/client/' : 'http://localhost:8081/'}scripts/remoteEntry.js?build=${process.env.BUILD_ID}"></script>`;
+	const remoteBundleScript = `<script src="${process.env.NODE_ENV === 'production' ? `https://storage.googleapis.com/${process.env.PARTNER || 'boxed'}-remote/build/client/` : 'http://localhost:8081/'}scripts/remoteEntry.js?build=${process.env.BUILD_ID}"></script>`;
 
 	return h.response(`
 		<!DOCTYPE html>

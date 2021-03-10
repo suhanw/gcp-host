@@ -19,7 +19,7 @@ const config = {
 
 	output: {
 		path: path.join(__dirname, './build/client'),
-		publicPath: process.env.NODE_ENV === 'production' ? `https://storage.googleapis.com/gcp-host/build/client/` : `http://localhost:${port}/`, 
+		publicPath: process.env.NODE_ENV === 'production' ? `https://storage.googleapis.com/${process.env.PARTNER || 'boxed'}-host/build/client/` : `http://localhost:${port}/`, 
 		filename: `scripts/[name]${process.env.NODE_ENV === 'production' ? '.[contenthash]' : ''}.js`,
 	},
 
