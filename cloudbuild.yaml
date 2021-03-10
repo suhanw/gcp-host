@@ -8,10 +8,10 @@ steps:
       env:
           - 'NODE_ENV=production'
           # - 'PARTNER=aeon'
-    - name: gcr.io/cloud-builders/gsutil # downloads the build files from REMOTE Cloud Storage
-      args: ['-m', 'cp', '-r', 'gs://gcp-remote/build/*', 'remote-build']
     - name: gcr.io/cloud-builders/gsutil # uploads the build files to HOST Cloud Storage
       args: ['-m', 'rsync', '-r', '-c', '-d', './build', 'gs://gcp-host/build']
+    - name: gcr.io/cloud-builders/gsutil # downloads the build files from REMOTE Cloud Storage
+      args: ['-m', 'rsync', '-r', '-c', '-d', 'gs://gcp-remote/build/*', './remote-build']
     - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk' # deploys server to App Engine
       entrypoint: 'bash'
       args: ['-c', 'gcloud config set app/cloud_build_timeout 1600 && gcloud app deploy']

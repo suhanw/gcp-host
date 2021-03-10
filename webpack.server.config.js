@@ -34,7 +34,7 @@ let config = {
 			library: { type: 'commonjs-module' },
 			filename: 'container.js',
 			remotes: {
-				remote: path.join(__dirname, process.env.NODE_ENV === 'production' ? '../remote-build/server/container' : '../gcp-remote/build/server/container.js'),
+				remote: path.join(__dirname, process.env.NODE_ENV === 'production' ? '../remote-build/server/container.js' : '../gcp-remote/build/server/container.js'),
 			},
 			// shared: require("./package.json").dependencies,
 		}),
