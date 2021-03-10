@@ -42,7 +42,7 @@ module.exports = {
 		}),
 		new webpack.DefinePlugin({
 			'process.env.NODE_ENV': `"${process.env.NODE_ENV}"`,
-			'process.env.PARTNER': process.env.PARTNER || 'boxed',
+			'process.env.BUILD_ID': `"${process.env.BUILD_ID}"`,
 			'PARTNER_SSR_ENABLED': !process.env.PARTNER || process.env.PARTNER === 'boxed',
 		}),
 	]
