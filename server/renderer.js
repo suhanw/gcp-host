@@ -30,7 +30,7 @@ const renderer = async (request, h) => {
 
 	// const clientBundleScript = `<script src="http://localhost:8080/scripts/bundle.js"></script>`;
 	// const clientBundleStyle = `<link rel="stylesheet" href="http://localhost:8080/styles/client_index_js.bundle.css">`;
-	const remoteBundleScript = `<script src="http://localhost:8081/scripts/remoteEntry.js"></script>`;
+	const remoteBundleScript = `<script src="${process.env.NODE_ENV === 'production' ? 'https://storage.googleapis.com/gcp-remote/build/client/' : 'http://localhost:8081/'}scripts/remoteEntry.js"></script>`;
 	// const remoteBundleScript = ''
 
 	// res.send(`
