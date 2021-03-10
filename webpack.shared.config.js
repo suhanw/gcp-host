@@ -43,6 +43,7 @@ module.exports = {
 		new webpack.DefinePlugin({
 			'process.env.NODE_ENV': `"${process.env.NODE_ENV}"`,
 			'process.env.BUILD_ID': `"${process.env.BUILD_ID}"`,
+			'process.env.PARTNER': `"${process.env.PARTNER}"`,
 			'PARTNER_SSR_ENABLED': !process.env.PARTNER || process.env.PARTNER === 'boxed',
 		}),
 	]
