@@ -12,7 +12,8 @@ steps:
           - 'PARTNER=aeon'
           - 'BUILD_ID=$BUILD_ID'
     - name: gcr.io/cloud-builders/gsutil # uploads the build files to HOST Cloud Storage
-      args: ['-m', 'rsync', '-r', '-c', '-d', './build', 'gs://aeon-host/build']
+      args: ['-m', 'rsync', '-r', '-c', './build', 'gs://aeon-host/build'] # don't delete old files
+      # args: ['-m', 'rsync', '-r', '-c', '-d', './build', 'gs://aeon-host/build']
     - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk' # deploys server to App Engine
       entrypoint: 'bash'
       args: ['-c', 'gcloud config set app/cloud_build_timeout 1600 && gcloud app deploy']

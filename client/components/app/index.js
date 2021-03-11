@@ -16,7 +16,7 @@ const App = () => {
 		{/* <div className={style.app}> */}
 			<InitialCss />
 			<TopNav />
-			Hello world again
+			Hello world
 			<Footer />
 		</div>
 	);
