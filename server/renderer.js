@@ -29,8 +29,12 @@ const renderer = async (request, h) => {
 
 	let remoteBundleScript = '';
 
-	if (process.env.PARTNER && process.env.PARTNER !== 'boxed') {
-		remoteBundleScript = `<script src="${process.env.NODE_ENV === 'production' ? `https://storage.googleapis.com/${process.env.PARTNER}-remote/build/client/` : 'http://localhost:8081/'}scripts/remoteEntry.js?build=${process.env.BUILD_ID}"></script>`;
+	if (typeof REMOTE_ENTRY !== 'undefined' && Boolean(REMOTE_ENTRY)) {
+		console.log({ REMOTE_ENTRY });
+	}
+
+	if (process.env.PARTNER && process.env.PARTNER !== 'boxed' && typeof REMOTE_ENTRY !== 'undefined' && Boolean(REMOTE_ENTRY)) {
+		remoteBundleScript = `<script src="${process.env.NODE_ENV === 'production' ? `https://storage.googleapis.com/${process.env.PARTNER}-remote/build/client/` : 'http://localhost:8081/'}${REMOTE_ENTRY}"></script>`;
 	}
 
 	return h.response(`
