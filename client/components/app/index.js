@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import loadable from '@loadable/component';
-import style from './style';
+// import style from './style';
+const InitialCss = loadable(() => import('components/initial-css'));
 const Footer = loadable(() => import('components/footer'));
 // const TopNav =  loadable(() => import('partner/components/top-nav'), { ssr: PARTNER_SSR_ENABLED }); // ONLY CSR
 import TopNav from 'partner/components/top-nav'; // SSR works but no initial CSS
@@ -11,7 +12,9 @@ const App = () => {
 	}, [])
 	
 	return (
-		<div className={style.app}>
+		<div className={'app'}>
+		{/* <div className={style.app}> */}
+			<InitialCss />
 			<TopNav />
 			Hello world again
 			<Footer />
