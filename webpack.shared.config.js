@@ -22,10 +22,10 @@ module.exports = {
 		extensions: ['.js', '.less'],
 	},
 
-	plugins: [
-		new LoadablePlugin({ // to enable SSR code splitting
-			filename: `loadable-stats.json`, // list of webpack chunk assets
-			writeToDisk: true 
-		}),
-	]
+	// plugins: [
+	// 	new LoadablePlugin({ // to enable SSR code splitting
+	// 		filename: `loadable-stats.json`, // list of webpack chunk assets
+	// 		writeToDisk: true 
+	// 	}),
+	// ]
 };

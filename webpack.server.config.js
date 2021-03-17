@@ -22,9 +22,7 @@ let config = {
 		filename: 'bundle.js',
 	},
 
-	externals: [webpackNodeExternals({
-		allowlist: [/^webpack\/container\/reference\//],
-	})],
+	externals: [webpackNodeExternals()],
 
 	module: {
 		rules: [

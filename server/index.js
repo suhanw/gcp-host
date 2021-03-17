@@ -1,52 +1,45 @@
-import 'core-js';
-import 'regenerator-runtime';
-import Hapi from '@hapi/hapi';
-import path from 'path';
+import React from 'react';
+import ReactDOMServer from 'react-dom/server';
+import express from 'express';
+import App from '../client/components/App';
 
-const init = async () => {
-	console.log({ NODE_ENV: process.env.NODE_ENV })
-	
-	const server = Hapi.server({
-		port: process.env.NODE_ENV === 'production' ? (process.env.PORT || 8080) : 3000,
-		// host: 'localhost',
-	});
+const app = express();
+const port = 3000;
 
-	await server.register([
-		require('@hapi/inert')
-	])
+app.use('/build/client', express.static('build/client'));
 
-	server.route({
-		method: 'GET',
-		path: '/{path*}',
-		handler: async (request, h) => {
-			const renderThunk = require('./render-thunk').default;
-			const renderer = renderThunk();
-			return await renderer(request, h);
-		},
-	});
+app.get('/', (req, res) => {
+	const jsx = ReactDOMServer.renderToString( // [A]
+		<App />
+	); 
 
-	server.route({
-		method: 'GET',
-		path: '/client/{file*}',
-		options: {
-			auth: false,
-			handler: {
-				directory: {
-					path: [
-						path.resolve(__dirname, '../build/client')
-					]
-				}
-			}
-		},
-	})
+	// const clientBundleScript = `<script src="http://localhost:8080/scripts/bundle.js"></script>`; // [B]
+	// const clientBundleStyle = `<link rel="stylesheet" href="http://localhost:8080/styles/bundle.css">`; // [B]
+	const clientBundleScript = process.env.NODE_ENV === 'production'
+		? `<script src="build/client/scripts/bundle.js"></script>` // [B]
+		: `<script src="http://localhost:8080/scripts/bundle.js"></script>`
 
-	await server.start();
-	console.log('Server running on %s', server.info.uri);
-};
+	const clientBundleStyle = process.env.NODE_ENV === 'production'
+		? `<link rel="stylesheet" href="build/client/styles/bundle.css">` // [B]
+		: `<link rel="stylesheet" href="http://localhost:8080/styles/bundle.css">`
 
-process.on('unhandledRejection', (err) => {
-	console.log(err);
-	process.exit(1);
+	res.send(`
+		<!DOCTYPE html>
+		<html lang="en">
+			<head>
+				<meta charset="UTF-8">
+				<meta name="viewport" content="width=device-width, initial-scale=1.0">
+				<title>My SSR App</title>
+				${clientBundleStyle} <!-- [B] -->
+			</head>
+			<body>
+				<div id='ssr-app'>${jsx}</div> <!-- [A] -->
+				${clientBundleScript} <!-- [B] -->
+			</body>
+		</html>
+	`);
 });
 
-init();
+app.listen(port, () => {
+	console.log(`App listening on http://localhost:${port}`);
+});

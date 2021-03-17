@@ -17,10 +17,6 @@
 	"author": "Suhan Wijaya",
 	"license": "ISC",
 	"dependencies": {
-		"@hapi/hapi": "^20.1.0",
-		"@hapi/inert": "^6.0.3",
-		"@loadable/component": "^5.14.1",
-		"@loadable/server": "^5.14.2",
 		"core-js": "^3.8.2",
 		"express": "^4.17.1",
 		"react": "^17.0.1",
