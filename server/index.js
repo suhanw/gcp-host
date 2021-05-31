@@ -4,7 +4,7 @@ import express from 'express';
 import App from '../client/components/App';
 
 const app = express();
-const port = 3000;
+const port = process.env.NODE_ENV === 'production' ? 8080 : 3000;
 
 app.use('/build/client', express.static('build/client'));
 
